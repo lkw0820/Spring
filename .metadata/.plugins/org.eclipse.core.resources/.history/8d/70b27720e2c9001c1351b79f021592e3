@@ -1,0 +1,37 @@
+package com.inhatc.cs;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.inhatc.domain.BoardVO;
+import com.inhatc.service.BoardService;
+
+@Controller
+@RequestMapping("/board/*")
+public class BoardController {
+
+	@Inject
+	private BoardService service;
+	
+	//  /board/register
+	@RequestMapping(value="/register", method=RequestMethod.GET)
+	public void registerGET(BoardVO board,Model model)throws Exception{
+		System.out.println("Request register(GET Method)");
+	}
+	@RequestMapping(value="/register", method=RequestMethod.POST)
+	public void registerPOST(BoardVO board,Model model)throws Exception{
+		System.out.println("Request register(POST Method)");
+		service.regist(board);
+	}
+	//  board/listAll
+	@RequestMapping(value="/listAll",method=RequestMethod.GET)
+	public void listAll(Model model) throws Exception{
+		System.out.println("Request List All");
+		model.addAttribute("list",service.listAll());
+	}
+	
+}

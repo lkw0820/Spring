@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Menu201844089Mapper">
+	<insert id="insertMenu">
+		insert into tbl_201844089_menu(menuid,menu,menuname,price)
+		values(#{menuid},#{menu},#{menuname},#{price})
+	</insert>
+	
+	<select id="selectMenu" resultType="com.inhatc.domain.MenuVO">
+		select * from tbl_201844089_menu where menuid=#{menuid}
+	</select>
+	
+	<update id="updateMenu">
+		update tbl_201844089_menu set menu=#{menu}, menuname=#{menuname}, price=#{price}
+		where menuid=#{menuid}
+	</update>
+	
+	<delete id="deleteMenu">
+		delete from tbl_201844089_menu where menuid=#{menuid}
+	</delete>
+	
+	<select id="countMenu" resultType="int">
+		select count(*) from tbl_201844089_menu
+	</select>
+	
+	<select id="listMenu" resultType="com.inhatc.domain.MenuVO">
+		select menuid, menu, menuname, price from tbl_201844089_menu
+	</select>
+</mapper>
