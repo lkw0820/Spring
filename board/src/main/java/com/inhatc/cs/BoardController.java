@@ -4,12 +4,15 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.inhatc.domain.BoardVO;
+import com.inhatc.domain.Criteria;
+import com.inhatc.domain.PageMaker;
 import com.inhatc.service.BoardService;
 
 @Controller
@@ -56,6 +59,19 @@ public class BoardController {
 		service.modify(board);
 		return "redirect:/board/listAll";
 	}
-	
+	@RequestMapping(value="/listCri",method=RequestMethod.GET)
+	public void listCri(Criteria cri, Model model) throws Exception{
+		System.out.println("Request List Criteria");
+		model.addAttribute("list",service.listCriteria(cri));
+	}
+	@RequestMapping(value="/listPage",method=RequestMethod.GET)
+	public void listPage(Criteria cri, Model model) throws Exception{
+		System.out.println("List Page Called");
+		model.addAttribute("list",service.listCriteria(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.listCountCriteria(cri));
+		model.addAttribute("pageMaker",pageMaker);
+	}
 	
 }

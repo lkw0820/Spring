@@ -32,6 +32,29 @@
 		<td>${boardVO.viewcnt }</td>
 		</tr>
 	</c:forEach>
+	<div>
+		<ui>
+			<c:if test="${pageMaker.prev }">
+				<li>
+					&laquo;
+				</li>
+			</c:if>
+		</ui>
+		<c:forEach begin="${pageMaker.startPage }"
+					end="${pageMaker.endPage }" var="idx">
+			<li>
+				<c:out value="${pageMaker.cri.page==idx?'class=active':''}"/>
+					${idx }
+			</li>
+		</c:forEach>
+		<ui>
+			<c:if test="${pageMaker.next }">
+				<li>
+					&raquo;
+				</li>
+			</c:if>
+		</ui>
+	</div>
 </table>
 <%@include file="../include/footer.jsp" %>
 </body>
